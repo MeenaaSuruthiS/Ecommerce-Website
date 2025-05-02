@@ -14,7 +14,7 @@ import './App.css'
 
 export default function App() {
   return (
-    <ClerkProvider publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY}>
+    <ClerkProvider publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY || ''}>
       <CartProvider>
         <Router>
         <div className="min-h-screen flex flex-col">
