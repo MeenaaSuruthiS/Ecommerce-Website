@@ -1,7 +1,7 @@
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { CartProvider } from './context/CartContext'
-import { ClerkProvider } from '@clerk/clerk-react'
+
 import Header from './components/Header'
 import Footer from './components/Footer'
 import HomePage from './components/HomePage'
@@ -19,8 +19,7 @@ if (!PUBLISHABLE_KEY) {
 
 export default function App() {
   return (
-    <ClerkProvider publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY}>
-      <CartProvider>
+    <CartProvider>
         <Router>
           <div className="min-h-screen flex flex-col">
             <Header />
@@ -38,6 +37,5 @@ export default function App() {
           </div>
         </Router>
       </CartProvider>
-    </ClerkProvider>
   )
 }
