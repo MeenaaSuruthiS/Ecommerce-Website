@@ -7,6 +7,9 @@ import Footer from './components/Footer'
 import HomePage from './components/HomePage'
 import ProductListingPage from './components/ProductListingPage'
 import FullCartPage from './components/FullCartPage'
+import About from './components/About'
+import Categories from './components/Categories'
+import Contact from './components/Contact'
 import './App.css'
 
 export default function App() {
