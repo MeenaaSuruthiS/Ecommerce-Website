@@ -11,6 +11,7 @@ export default function Header() {
   const { state } = useCart()
   const { user, isSignedIn } = useClerk()
   const itemCount = state.items.reduce((sum, item) => sum + item.quantity, 0)
+  const isGuestMode = true // Enable guest mode
 
   return (
     <header className="bg-white shadow-md">
@@ -37,13 +38,17 @@ export default function Header() {
               Products
             </Link>
             
-            {isSignedIn ? (
-              <div className="flex items-center gap-4">
-                <span>Hello, {user.firstName}</span>
-                <SignOutButton className="text-red-600 hover:text-red-800" />
-              </div>
-            ) : (
-              <SignInButton className="text-blue-600 hover:text-blue-800" />
+            {!isGuestMode && (
+              <>
+                {isSignedIn ? (
+                  <div className="flex items-center gap-4">
+                    <span>Hello, {user.firstName}</span>
+                    <SignOutButton className="text-red-600 hover:text-red-800" />
+                  </div>
+                ) : (
+                  <SignInButton className="text-blue-600 hover:text-blue-800" />
+                )}
+              </>
             )}
 
             <Popover className="relative">
