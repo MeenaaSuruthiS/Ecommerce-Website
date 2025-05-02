@@ -9,9 +9,13 @@ import MiniCart from './MiniCart'
 
 export default function Header() {
   const { state } = useCart()
-  const { user, isSignedIn } = useClerk()
   const itemCount = state.items.reduce((sum, item) => sum + item.quantity, 0)
-  const isGuestMode = true // Enable guest mode
+  const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('currentUser') || 'null'))
+
+  const handleLogout = () => {
+    localStorage.removeItem('currentUser');
+    setCurrentUser(null);
+  }
 
   return (
     <header className="bg-white shadow-md">
@@ -38,17 +42,20 @@ export default function Header() {
               Products
             </Link>
             
-            {!isGuestMode && (
-              <>
-                {isSignedIn ? (
-                  <div className="flex items-center gap-4">
-                    <span>Hello, {user.firstName}</span>
-                    <SignOutButton className="text-red-600 hover:text-red-800" />
-                  </div>
-                ) : (
-                  <SignInButton className="text-blue-600 hover:text-blue-800" />
-                )}
-              </>
+            {currentUser ? (
+              <div className="flex items-center gap-4">
+                <span>Hello, {currentUser.email}</span>
+                <button 
+                  onClick={handleLogout}
+                  className="text-red-600 hover:text-red-800"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <Link to="/auth" className="text-blue-600 hover:text-blue-800">
+                Login/Register
+              </Link>
             )}
 
             <Popover className="relative">

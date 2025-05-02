@@ -31,6 +31,7 @@ export default function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/categories" element={<Categories />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/auth" element={<CustomerAuth />} />
               </Routes>
             </main>
             <Footer />
