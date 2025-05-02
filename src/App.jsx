@@ -12,7 +12,8 @@ import Categories from './components/Categories'
 import Contact from './components/Contact'
 import './App.css'
 
-if (!import.meta.env.VITE_CLERK_PUBLISHABLE_KEY) {
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+if (!PUBLISHABLE_KEY) {
   throw new Error("Missing Publishable Key")
 }
 
