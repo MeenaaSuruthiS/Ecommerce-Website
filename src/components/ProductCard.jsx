@@ -1,11 +1,23 @@
 
 import { useCart } from '../context/CartContext'
+import { StarIcon } from '@heroicons/react/24/solid'
 
 export default function ProductCard({ product }) {
   const { dispatch } = useCart()
 
   const addToCart = () => {
     dispatch({ type: 'ADD_TO_CART', payload: product })
+  }
+
+  const renderStars = (rating) => {
+    return [...Array(5)].map((_, index) => (
+      <StarIcon
+        key={index}
+        className={`h-5 w-5 ${
+          index < Math.round(rating) ? 'text-yellow-400' : 'text-gray-300'
+        }`}
+      />
+    ))
   }
 
   return (
@@ -20,6 +32,12 @@ export default function ProductCard({ product }) {
           {product.title}
         </h3>
         <p className="mt-1 text-gray-500 truncate">{product.description}</p>
+        <div className="flex items-center mt-2">
+          {renderStars(product.rating?.rate || 0)}
+          <span className="ml-2 text-sm text-gray-500">
+            ({product.rating?.count || 0} reviews)
+          </span>
+        </div>
         <div className="mt-4 flex items-center justify-between">
           <span className="text-lg font-bold text-gray-900">
             ${product.price}

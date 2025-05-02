@@ -3,11 +3,13 @@ import { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { Popover, Transition } from '@headlessui/react'
 import { ShoppingCartIcon } from '@heroicons/react/24/outline'
+import { useClerk, SignInButton, SignOutButton } from '@clerk/clerk-react'
 import { useCart } from '../context/CartContext'
 import MiniCart from './MiniCart'
 
 export default function Header() {
   const { state } = useCart()
+  const { user, isSignedIn } = useClerk()
   const itemCount = state.items.reduce((sum, item) => sum + item.quantity, 0)
 
   return (
@@ -19,10 +21,31 @@ export default function Header() {
           </Link>
           
           <div className="flex items-center gap-6">
+            <Link to="/" className="text-gray-600 hover:text-gray-900">
+              Home
+            </Link>
+            <Link to="/about" className="text-gray-600 hover:text-gray-900">
+              About
+            </Link>
+            <Link to="/categories" className="text-gray-600 hover:text-gray-900">
+              Categories
+            </Link>
+            <Link to="/contact" className="text-gray-600 hover:text-gray-900">
+              Contact
+            </Link>
             <Link to="/products" className="text-gray-600 hover:text-gray-900">
               Products
             </Link>
             
+            {isSignedIn ? (
+              <div className="flex items-center gap-4">
+                <span>Hello, {user.firstName}</span>
+                <SignOutButton className="text-red-600 hover:text-red-800" />
+              </div>
+            ) : (
+              <SignInButton className="text-blue-600 hover:text-blue-800" />
+            )}
+
             <Popover className="relative">
               <Popover.Button className="flex items-center text-gray-600 hover:text-gray-900">
                 <ShoppingCartIcon className="h-6 w-6" />
