@@ -1,4 +1,3 @@
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { CartProvider } from './context/CartContext'
 
@@ -13,31 +12,32 @@ import Categories from './components/Categories'
 import Contact from './components/Contact'
 import './App.css'
 
+// Optional Clerk key check (non-breaking)
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 if (!PUBLISHABLE_KEY) {
-  throw new Error("Missing Publishable Key")
+  console.warn("Missing Clerk Publishable Key — authentication may not function.");
 }
 
 export default function App() {
   return (
     <CartProvider>
-        <Router>
-          <div className="min-h-screen flex flex-col">
-            <Header />
-            <main className="flex-grow">
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/products" element={<ProductListingPage />} />
-                <Route path="/cart" element={<FullCartPage />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/categories" element={<Categories />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/auth" element={<CustomerAuth />} />
-              </Routes>
-            </main>
-            <Footer />
-          </div>
-        </Router>
-      </CartProvider>
+      <Router>
+        <div className="min-h-screen flex flex-col">
+          <Header />
+          <main className="flex-grow">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/products" element={<ProductListingPage />} />
+              <Route path="/cart" element={<FullCartPage />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/categories" element={<Categories />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/auth" element={<CustomerAuth />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </Router>
+    </CartProvider>
   )
 }
