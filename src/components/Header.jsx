@@ -1,9 +1,8 @@
 
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Popover, Transition } from '@headlessui/react'
 import { ShoppingCartIcon } from '@heroicons/react/24/outline'
-import { useClerk, SignInButton, SignOutButton } from '@clerk/clerk-react'
 import { useCart } from '../context/CartContext'
 import MiniCart from './MiniCart'
 

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { CartProvider } from './context/CartContext'
 
 import Header from './components/Header'
+import CustomerAuth from './components/Auth/CustomerAuth'
 import Footer from './components/Footer'
 import HomePage from './components/HomePage'
 import ProductListingPage from './components/ProductListingPage'
